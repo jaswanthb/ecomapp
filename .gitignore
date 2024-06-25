@@ -1,0 +1,18 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/eCommerceApp/bin
+/eCommerceApp/obj
+/eCommerceDB/bin
+/eCommerceDB/obj
+.vs
+/eCommerce.Models/obj
+/eCommerce.Models/bin
+/eCommerceDB/Import Schema Logs
+/eCommerceRepository/bin
+/eCommerceRepository/obj
+/eCommerceDB/eCommerce.DB.jfm
+/eCommerceService/bin
+/eCommerceService/obj
+*.user
