@@ -27,14 +27,25 @@ namespace eCommerceApp.Controllers
         [Route("customers")]
         public Customers CreateCustomer(Customers customer)
         {
+            if (!string.IsNullOrEmpty(customer.CustomerCode) || customer.CustomerCode.Length >20)
+                return customer;
+
             var res = _customerService.CreateCustomer(customer);
             return res;
         }
+
+        [HttpPut("customers")]
+        public Customers UpdateCustomer(Customers customer)
+        {
+            var result = _customerService.UpdateCustomer(customer);
+            return result;
+        }
+
+        [HttpDelete("customers")]
+        public bool DeleteCustomer(string customerCode)
+        {
+            var result = _customerService.DeleteCustomer(customerCode);
+            return result;
+        }
     }
 }
-
-
-/*
- Get
- 
- */

@@ -7,5 +7,8 @@ namespace eCommerce.Service.Contracts
         List<Customers> GetCustomers(string searchParam);
 
         Customers CreateCustomer(Customers customer);
+
+        Customers UpdateCustomer(Customers customer);
+        bool DeleteCustomer(string customerCode);
     }
 }
