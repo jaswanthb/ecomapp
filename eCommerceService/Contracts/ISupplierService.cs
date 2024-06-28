@@ -10,5 +10,6 @@ namespace eCommerce.Service.Contracts
     public interface ISupplierService
     {
         List<Suppliers> GetSuppliers(string searchString);
+
     }
 }
