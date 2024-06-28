@@ -25,5 +25,25 @@ namespace eCommerceApp.Controllers
             return _supplierService.GetSuppliers(searchQuery);
         }
 
+        [HttpGet("Suppliers")]
+        public Suppliers InsertSupplier(Suppliers supplier)
+        {
+            var res = _supplierService.InsertSupplier(supplier);
+            return res;
+        }
+        [HttpPost("suppliers")]
+        public Suppliers UpdateSupplier(Suppliers supplier)
+        {
+            var res = _supplierService.UpdateSupplier(supplier);
+            return res;
+        }
+        [HttpDelete("suppliers")]
+        public Suppliers DeleteSupplier(Suppliers supplier)
+        {
+            var res = _supplierService?.DeleteSupplier(supplier);
+            return res;
+        }
+
+
     }
 }

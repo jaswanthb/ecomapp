@@ -24,11 +24,24 @@ namespace eCommerce.Service
                                                 || s.City.Contains(searchString))
                                         .ToList();
         }
-        public Suppliers InsertSupplier(Suppliers suppier)
+        public Suppliers InsertSupplier(Suppliers supplier)
         {
-            _dbContext.Suppliers.Add(suppier);
+            _dbContext.Suppliers.Add(supplier);
             _dbContext.SaveChanges();
-            return suppier;
+            return supplier;
+        }
+        public Suppliers UpdateSupplier(Suppliers supplier)
+        {
+            _dbContext.Suppliers.Update(supplier);
+            _dbContext.SaveChanges();
+            return supplier;
+        } 
+
+        public Suppliers DeleteSupplier(Suppliers supplier)
+        {
+            _dbContext.Suppliers.Remove(supplier);
+            _dbContext.SaveChanges();
+            return supplier;
         }
     }
 }
