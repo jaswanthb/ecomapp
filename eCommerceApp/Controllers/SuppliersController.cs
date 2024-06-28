@@ -37,6 +37,12 @@ namespace eCommerceApp.Controllers
             var res = _supplierService.UpdateSupplier(supplier);
             return res;
         }
+        [HttpDelete("suppliers")]
+        public Suppliers DeleteSupplier(Suppliers supplier)
+        {
+            var res = _supplierService?.DeleteSupplier(supplier);
+            return res;
+        }
 
 
     }

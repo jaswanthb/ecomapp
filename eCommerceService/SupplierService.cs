@@ -36,5 +36,12 @@ namespace eCommerce.Service
             _dbContext.SaveChanges();
             return supplier;
         } 
+
+        public Suppliers DeleteSupplier(Suppliers supplier)
+        {
+            _dbContext.Suppliers.Remove(supplier);
+            _dbContext.SaveChanges();
+            return supplier;
+        }
     }
 }

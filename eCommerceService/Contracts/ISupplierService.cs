@@ -15,5 +15,7 @@ namespace eCommerce.Service.Contracts
 
         public Suppliers UpdateSupplier(Suppliers supplier);
 
+        public Suppliers DeleteSupplier(Suppliers supplier);
+
     }
 }
