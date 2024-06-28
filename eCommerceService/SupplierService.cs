@@ -30,6 +30,11 @@ namespace eCommerce.Service
             _dbContext.SaveChanges();
             return supplier;
         }
-
+        public Suppliers UpdateSupplier(Suppliers supplier)
+        {
+            _dbContext.Suppliers.Update(supplier);
+            _dbContext.SaveChanges();
+            return supplier;
+        } 
     }
 }

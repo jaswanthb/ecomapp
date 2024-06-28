@@ -31,6 +31,13 @@ namespace eCommerceApp.Controllers
             var res = _supplierService.InsertSupplier(supplier);
             return res;
         }
+        [HttpPost("suppliers")]
+        public Suppliers UpdateSupplier(Suppliers supplier)
+        {
+            var res = _supplierService.UpdateSupplier(supplier);
+            return res;
+        }
+
 
     }
 }
