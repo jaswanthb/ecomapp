@@ -24,5 +24,11 @@ namespace eCommerce.Service
                                                 || s.City.Contains(searchString))
                                         .ToList();
         }
+        public Suppliers InsertSupplier(Suppliers suppier)
+        {
+            _dbContext.Suppliers.Add(suppier);
+            _dbContext.SaveChanges();
+            return suppier;
+        }
     }
 }
