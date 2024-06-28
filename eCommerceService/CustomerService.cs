@@ -34,8 +34,7 @@ namespace eCommerce.Service
         {
             try
             {
-                var cust = _dbContext.Customers.FirstOrDefault(c => c.CustomerCode == customercode);
-                //cust.isactive = false;
+                var cust = _dbContext.Customers.FirstOrDefault(c => c.CustomerCode == customercode)
                 _dbContext.Customers.Update(cust);
                 _dbContext.SaveChanges();
                 return true;
