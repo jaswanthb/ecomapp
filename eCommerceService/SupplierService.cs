@@ -37,11 +37,18 @@ namespace eCommerce.Service
             return supplier;
         } 
 
-        public Suppliers DeleteSupplier(Suppliers supplier)
+        public bool DeleteSupplier(Suppliers supplier)
         {
-            _dbContext.Suppliers.Remove(supplier);
-            _dbContext.SaveChanges();
-            return supplier;
+            try
+            {
+                _dbContext.Suppliers.Remove(supplier);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

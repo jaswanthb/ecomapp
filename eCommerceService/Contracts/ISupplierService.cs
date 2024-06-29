@@ -11,11 +11,11 @@ namespace eCommerce.Service.Contracts
     {
         List<Suppliers> GetSuppliers(string searchString);
 
-        public Suppliers InsertSupplier(Suppliers suppier);
+        Suppliers InsertSupplier(Suppliers suppier);
 
-        public Suppliers UpdateSupplier(Suppliers supplier);
+        Suppliers UpdateSupplier(Suppliers supplier);
 
-        public Suppliers DeleteSupplier(Suppliers supplier);
+        bool DeleteSupplier(Suppliers supplier);
 
     }
 }
