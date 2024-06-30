@@ -27,5 +27,7 @@ namespace eCommerce.Models
         public string Phone { get; set; }
         public string? Fax { get; set; }
         public string? HomePage { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }
