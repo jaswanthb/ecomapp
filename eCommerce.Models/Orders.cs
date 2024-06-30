@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace eCommerce.Models
 {
+    [Table("Orders")]
     public class Orders
     {
         [Key]
@@ -24,10 +25,10 @@ namespace eCommerce.Models
         public string ShipName { get; set; }
         public string ShipAddress { get; set; }
         public string ShipCity { get; set; }
-        public string ShipRegion { get; set; }
+        public string? ShipRegion { get; set; }
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
 
-        public ICollection<OrderDetails> orderDetails { get; set; }
+        public virtual ICollection<OrderDetails> _OrderDetails { get; set; }
     }
 }
