@@ -1,4 +1,5 @@
 ﻿using eCommerce.Models;
+using eCommerce.Models.ViewModels;
 using eCommerce.Service;
 using eCommerce.Service.Contracts;
 using Microsoft.AspNetCore.Mvc;
@@ -25,24 +26,24 @@ namespace eCommerceApp.Controllers
 
         [HttpPost]
         [Route("customers")]
-        public Customers CreateCustomer(Customers customer)
+        public ResponseMessage CreateCustomer(Customers customer)
         {
-            if (!string.IsNullOrEmpty(customer.CustomerCode) || customer.CustomerCode.Length >20)
-                return customer;
+            if (customer.CustomerCode.Length >20 || string.IsNullOrEmpty(customer.CustomerCode))
+                return new ResponseMessage() {IsError = true,ErrorMessage = "Customer code is empty or customercode length is greater than 20"};
 
             var res = _customerService.CreateCustomer(customer);
             return res;
         }
 
         [HttpPut("customers")]
-        public Customers UpdateCustomer(Customers customer)
+        public ResponseMessage UpdateCustomer(Customers customer)
         {
             var result = _customerService.UpdateCustomer(customer);
             return result;
         }
 
         [HttpDelete("customers")]
-        public bool DeleteCustomer(string customerCode)
+        public ResponseMessage DeleteCustomer(string customerCode)
         {
             var result = _customerService.DeleteCustomer(customerCode);
             return result;

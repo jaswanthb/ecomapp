@@ -1,4 +1,5 @@
 ﻿using eCommerce.Models;
+using eCommerce.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,11 @@ namespace eCommerce.Service.Contracts
     {
         List<Suppliers> GetSuppliers(string searchString);
 
-        Suppliers InsertSupplier(Suppliers suppier);
+        ResponseMessage InsertSupplier(Suppliers suppier);
 
-        Suppliers UpdateSupplier(Suppliers supplier);
+        ResponseMessage UpdateSupplier(Suppliers supplier);
 
-        bool DeleteSupplier(string supplier);
+        ResponseMessage DeleteSupplier(int supplierId);
 
     }
 }

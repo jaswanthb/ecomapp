@@ -1,4 +1,5 @@
 ﻿using eCommerce.Models;
+using eCommerce.Models.ViewModels;
 using eCommerce.Service.Contracts;
 using eCommerceRepository;
 
@@ -12,43 +13,109 @@ namespace eCommerce.Service
             _dbContext = dbContext;
         }
 
-        public Customers CreateCustomer(Customers customer)
+        public ResponseMessage CreateCustomer(Customers customer)
         {
-
-
-            _dbContext.Customers.Add(customer);
-
-            var res = _dbContext.SaveChanges();
-            return customer;
+            ResponseMessage createCustResponseMes = new ResponseMessage();
+            try
+            {
+                var res = _dbContext.Customers.Any(c => c.CustomerCode == customer.CustomerCode);
+                if (!res)
+                {
+                    _dbContext.Customers.Add(customer);
+                    _dbContext.SaveChanges();
+                    createCustResponseMes.IsError = false;
+                    return createCustResponseMes;
+                }
+                else
+                {
+                    createCustResponseMes.IsError = true;
+                    createCustResponseMes.ErrorMessage = $"Customer already exists with given customer code{customer.CustomerCode}";
+                    return createCustResponseMes;
+                }
+            }
+            catch (Exception ex)
+            {
+                createCustResponseMes.IsError = true;
+                createCustResponseMes.ErrorMessage = $"Something went wrong creating customer{customer.CompanyName}";
+                return createCustResponseMes;
+            }
         }
 
-        public Customers UpdateCustomer(Customers customer)
+        public ResponseMessage UpdateCustomer(Customers customer)
         {
-            _dbContext.Customers.Update(customer);
-            _dbContext.SaveChanges();
+            ResponseMessage custUpdateresponse = new ResponseMessage();
+            //Customers res = null;
+            try
+            {
 
-            return customer;
+                var res = _dbContext.Customers.FirstOrDefault(c => c.CustomerID == customer.CustomerID);
+                if (res != null)
+                {
+                    res.CompanyName = customer.CompanyName;
+                    res.ContactName = customer.ContactName;
+                    res.ContactTitle = customer.ContactTitle;
+                    res.Address = customer.Address;
+                    res.City = customer.City;
+                    res.Region = customer.Region;
+                    res.Phone = customer.Phone;
+                    res.PostalCode = customer.PostalCode;
+                    res.Country = customer.Country;
+                    res.Fax = customer.Fax;
+
+                    _dbContext.Customers.Update(res);
+                    _dbContext.SaveChanges();
+                    custUpdateresponse.IsError = false;
+                    return custUpdateresponse;
+                }
+                else
+                {
+                    custUpdateresponse.IsError = true;
+                    custUpdateresponse.ErrorMessage = $"Customer With {res.CustomerID} Does not Exist";
+                    return custUpdateresponse;
+                }
+            }
+            catch (Exception ex)
+            {
+                custUpdateresponse.IsError = true;
+                custUpdateresponse.ErrorMessage = $"Something went wrong when updating the Customer{customer.CustomerID}";
+                return custUpdateresponse;
+            }
         }
-
-        public bool DeleteCustomer(string customercode)
+        public ResponseMessage DeleteCustomer(string customercode)
         {
+            ResponseMessage customerResponseMessage = new ResponseMessage();
             try
             {
                 var cust = _dbContext.Customers.FirstOrDefault(c => c.CustomerCode == customercode);
-                cust.IsActive = false;
-                _dbContext.Customers.Update(cust);
-                _dbContext.SaveChanges();
-                return true;
+                if (cust != null)
+                {
+                    cust.IsActive = false;
+                    _dbContext.Customers.Update(cust);
+                    _dbContext.SaveChanges();
+                    customerResponseMessage.IsError = false;
+                    return customerResponseMessage;
+                }
+                else
+                {
+                    customerResponseMessage.IsError = true;
+                    customerResponseMessage.ErrorMessage = $"Customer With {customercode} Does not Exist";
+                    return customerResponseMessage;
+                }
             }
-            catch (Exception ex) {
-                return false;
+            catch (Exception ex)
+            {
+
+                customerResponseMessage.IsError = true;
+                customerResponseMessage.ErrorMessage = $"Something went wrong when deleting the Customer{customercode}";
+                return customerResponseMessage;
             }
         }
 
         public List<Customers> GetCustomers(string searchParam)
         {
             var custList = from c in _dbContext.Customers
-                     where c.CustomerCode.Contains(searchParam) select c;
+                           where c.CustomerCode.Contains(searchParam)
+                           select c;
 
             return _dbContext.Customers.Where(c => c.CustomerCode.Contains(searchParam)).ToList();
         }

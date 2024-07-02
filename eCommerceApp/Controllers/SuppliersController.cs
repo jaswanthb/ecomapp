@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using eCommerce.Models;
+using eCommerce.Models.ViewModels;
 
 namespace eCommerceApp.Controllers
 {
@@ -26,21 +27,21 @@ namespace eCommerceApp.Controllers
         }
 
         [HttpPost("Suppliers")]
-        public Suppliers InsertSupplier(Suppliers supplier)
+        public ResponseMessage InsertSupplier(Suppliers supplier)
         {
             var res = _supplierService.InsertSupplier(supplier);
             return res;
         }
         [HttpPut("suppliers")]
-        public Suppliers UpdateSupplier(Suppliers supplier)
+        public ResponseMessage UpdateSupplier(Suppliers supplier)
         {
             var res = _supplierService.UpdateSupplier(supplier);
             return res;
         }
         [HttpDelete("suppliers")]
-        public bool DeleteSupplier(Suppliers supplier)
+        public ResponseMessage DeleteSupplier(int supplierId)
         {
-            var res = _supplierService.DeleteSupplier(supplier);
+            var res = _supplierService.DeleteSupplier(supplierId);
             return res;
         }
 
