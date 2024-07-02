@@ -29,7 +29,7 @@ namespace eCommerce.Service
                 else
                 {
                     createCustResponseMes.IsError = true;
-                    createCustResponseMes.ErrorMessage = $"Customer already exists with given customer code{customer.CustomerCode}";
+                    createCustResponseMes.ErrorMessage = $"Customer already exists with given customer code {customer.CustomerCode}";
                     return createCustResponseMes;
                 }
             }
@@ -77,7 +77,7 @@ namespace eCommerce.Service
             catch (Exception ex)
             {
                 custUpdateresponse.IsError = true;
-                custUpdateresponse.ErrorMessage = $"Something went wrong when updating the Customer{customer.CustomerID}";
+                custUpdateresponse.ErrorMessage = $"Something went wrong when updating the Customer {customer.CustomerID}";
                 return custUpdateresponse;
             }
         }
@@ -106,7 +106,7 @@ namespace eCommerce.Service
             {
 
                 customerResponseMessage.IsError = true;
-                customerResponseMessage.ErrorMessage = $"Something went wrong when deleting the Customer{customercode}";
+                customerResponseMessage.ErrorMessage = $"Something went wrong when deleting the Customer {customercode}";
                 return customerResponseMessage;
             }
         }

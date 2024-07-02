@@ -28,9 +28,31 @@ namespace eCommerce.Service
         }
         public ResponseMessage InsertSupplier(Suppliers supplier)
         {
-            _dbContext.Suppliers.Add(supplier);
-            _dbContext.SaveChanges();
-            return null;
+            ResponseMessage supplierInsertMessage = new ResponseMessage();
+            try
+            {
+                var res = _dbContext.Suppliers.Any(s => s.SupplierID == supplier.SupplierID);
+                if (!res)
+                {
+                    _dbContext.Suppliers.Add(supplier);
+                    _dbContext.SaveChanges();
+                    supplierInsertMessage.IsError = false;
+                    return supplierInsertMessage;
+                }
+                else
+                {
+                    supplierInsertMessage.IsError = true;
+                    supplierInsertMessage.ErrorMessage = $"Supplier already exists with given Supplier Id {supplier.SupplierID}";
+                    return supplierInsertMessage;
+                }
+            }
+            catch
+            {
+                supplierInsertMessage.IsError = true;
+                supplierInsertMessage.ErrorMessage = $"Something went wrong while inserting supplier {supplier.SupplierID}";
+                return supplierInsertMessage;
+            }
+
         }
         public ResponseMessage UpdateSupplier(Suppliers supplier)
         {
