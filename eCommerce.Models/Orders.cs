@@ -31,9 +31,6 @@ namespace eCommerce.Models
 
         public virtual ICollection<OrderDetails> _OrderDetails { get; set; }
 
-        public object Include(Func<object, object> value)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

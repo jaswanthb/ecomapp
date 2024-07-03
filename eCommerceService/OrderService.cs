@@ -41,7 +41,9 @@ namespace eCommerce.Service
 
         public Orders InsertOrder(Orders orders)
         {
-            throw new NotImplementedException();
+            _dbContext.Orders.Add(orders);
+            _dbContext.SaveChanges();
+            return orders;
         }
 
         public Orders UpdateOrder(Orders orders)

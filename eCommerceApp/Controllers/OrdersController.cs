@@ -36,8 +36,9 @@ namespace eCommerce.App.Controllers
 
         // POST api/<OrdersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public Orders Post([FromBody] Orders order)
         {
+          return  _orderService.InsertOrder(order);
         }
 
         // PUT api/<OrdersController>/5
