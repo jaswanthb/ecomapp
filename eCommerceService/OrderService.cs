@@ -17,6 +17,16 @@ namespace eCommerce.Service
         {
             _dbContext = dbContext;
         }
+
+        public Orders GetOrderById(int id)
+        {
+            var order = _dbContext.Orders
+                          .Include(o => o._OrderDetails)
+                          .FirstOrDefault(o => o.OrderID == id);
+
+            return order;
+
+        }
         public bool DeleteOrder(Orders orders)
         {
             throw new NotImplementedException();
@@ -38,5 +48,7 @@ namespace eCommerce.Service
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

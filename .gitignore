@@ -16,4 +16,4 @@
 /eCommerceService/bin
 /eCommerceService/obj
 *.user
-/eCommerceApp/Controllers/CustomerController.cs
+/eCommerceDB/eCommerce.DB.dbmdl

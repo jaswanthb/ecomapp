@@ -30,5 +30,10 @@ namespace eCommerce.Models
         public string ShipCountry { get; set; }
 
         public virtual ICollection<OrderDetails> _OrderDetails { get; set; }
+
+        public object Include(Func<object, object> value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

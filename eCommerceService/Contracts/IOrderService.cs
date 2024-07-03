@@ -10,6 +10,9 @@ namespace eCommerce.Service.Contracts
     public interface IOrderService
     {
         List<Orders> GetOrders(string searchString);
+
+        Orders GetOrderById(int id);
+
         Orders InsertOrder(Orders orders);
         Orders UpdateOrder(Orders orders);
         bool DeleteOrder(Orders orders);
