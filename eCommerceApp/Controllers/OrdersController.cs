@@ -3,7 +3,7 @@ using eCommerce.Service;
 using eCommerce.Service.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using eCommerce.Models.ViewModels;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace eCommerce.App.Controllers
@@ -27,7 +27,7 @@ namespace eCommerce.App.Controllers
 
         // GET api/<OrdersController>/5
         [HttpGet("{id}")]
-        public Orders GetOrderById(int id)
+        public OrdersVM GetOrderById(int id)
         {
             return _orderService.GetOrderById(id);
         }
@@ -36,15 +36,16 @@ namespace eCommerce.App.Controllers
 
         // POST api/<OrdersController>
         [HttpPost]
-        public Orders Post([FromBody] Orders order)
+        public Orders InsertOrder([FromBody] OrdersVM order)
         {
           return  _orderService.InsertOrder(order);
         }
 
         // PUT api/<OrdersController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public Orders UpdateOrder(int id, [FromBody] OrdersVM order)
         {
+            return null;
         }
 
         // DELETE api/<OrdersController>/5

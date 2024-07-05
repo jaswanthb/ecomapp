@@ -1,4 +1,5 @@
 ﻿using eCommerce.Models;
+using eCommerce.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,10 @@ namespace eCommerce.Service.Contracts
     {
         List<Orders> GetOrders(string searchString);
 
-        Orders GetOrderById(int id);
+        OrdersVM GetOrderById(int id);
 
-        Orders InsertOrder(Orders orders);
-        Orders UpdateOrder(Orders orders);
+        Orders InsertOrder(OrdersVM orders);
+        Orders UpdateOrder(OrdersVM orders);
         bool DeleteOrder(Orders orders);
     }
 }
