@@ -45,7 +45,7 @@ namespace eCommerce.App.Controllers
         [HttpPut("{id}")]
         public Orders UpdateOrder(int id, [FromBody] OrdersVM order)
         {
-            return null;
+            return _orderService.UpdateOrder(order);
         }
 
         // DELETE api/<OrdersController>/5

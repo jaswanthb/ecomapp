@@ -116,7 +116,32 @@ namespace eCommerce.Service
 
         public Orders UpdateOrder(OrdersVM orders)
         {
-            throw new NotImplementedException();
+            Orders updateOrder = new Orders();
+            updateOrder.OrderID = orders.OrderID;
+            updateOrder.OrderDate = orders.OrderDate;
+            updateOrder.RequiredDate = orders.RequiredDate;
+            updateOrder.Freight = orders.Freight;
+            updateOrder.ShipName = orders.ShipName;
+            updateOrder.ShipAddress = orders.ShipAddress;
+            updateOrder.ShipCity = orders.ShipCity;
+            updateOrder.ShipRegion = orders.ShipRegion;
+            updateOrder.ShipPostalCode = orders.ShipPostalCode;
+            updateOrder.ShipCountry = orders.ShipCountry;
+
+            var updateOrderDetails = new List<OrderDetails>();
+            foreach(var order in orders.OrderDetails)
+            {
+                var orderDetails = new OrderDetails();
+                orderDetails.OrderID = order.OrderID;
+                orderDetails.OrderDetailsId = order.OrderDetailsId;
+                orderDetails.ProductID = order.ProductID;
+                orderDetails.Quantity = order.Quantity;
+                updateOrderDetails.Add(orderDetails);
+            }
+            updateOrder._OrderDetails = updateOrderDetails;
+            _dbContext.Orders.Update(updateOrder);
+            _dbContext.SaveChanges();
+            return updateOrder;
         }
 
 
