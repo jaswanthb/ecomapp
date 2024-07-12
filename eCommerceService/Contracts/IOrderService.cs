@@ -16,6 +16,6 @@ namespace eCommerce.Service.Contracts
 
         Orders InsertOrder(OrdersVM orders);
         Orders UpdateOrder(OrdersVM orders);
-        bool DeleteOrder(Orders orders);
+        ResponseMessage DeleteOrder(DeleteOrderVM deleteOrder);
     }
 }

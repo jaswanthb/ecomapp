@@ -23,6 +23,8 @@ namespace eCommerce.Models.ViewModels
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
 
+        public bool IsActive { get; set; }
+
         public  List<OrderDetailsVM> OrderDetails { get; set; }
     }
     public class OrderDetailsVM
@@ -33,5 +35,7 @@ namespace eCommerce.Models.ViewModels
         public decimal UnitPrice { get; set; }
         public Int16 Quantity { get; set; }
         public Single Discount { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

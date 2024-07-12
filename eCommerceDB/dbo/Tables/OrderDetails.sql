@@ -5,6 +5,7 @@
     [UnitPrice]      MONEY    NOT NULL,
     [Quantity]       SMALLINT NOT NULL,
     [Discount]       REAL     NOT NULL,
+    [IsActive] BIT NOT NULL DEFAULT 1, 
     PRIMARY KEY CLUSTERED ([OrderDetailsId] ASC),
     FOREIGN KEY ([OrderID]) REFERENCES [dbo].[Orders] ([OrderID]),
     FOREIGN KEY ([ProductID]) REFERENCES [dbo].[Products] ([ProductID])

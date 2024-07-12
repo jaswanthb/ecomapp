@@ -12,6 +12,7 @@
     [ShipRegion]     NVARCHAR (15) NULL,
     [ShipPostalCode] NVARCHAR (10) NULL,
     [ShipCountry]    NVARCHAR (15) NULL,
+    [IsActive] BIT NOT NULL DEFAULT 1, 
     CONSTRAINT [PK_Orders] PRIMARY KEY CLUSTERED ([OrderID] ASC),
     FOREIGN KEY ([CustomerID]) REFERENCES [dbo].[Customers] ([CustomerID])
 );

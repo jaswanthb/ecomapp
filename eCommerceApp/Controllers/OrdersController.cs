@@ -42,16 +42,17 @@ namespace eCommerce.App.Controllers
         }
 
         // PUT api/<OrdersController>/5
-        [HttpPut("{id}")]
-        public Orders UpdateOrder(int id, [FromBody] OrdersVM order)
+        [HttpPut]
+        public Orders UpdateOrder([FromBody] OrdersVM order)
         {
             return _orderService.UpdateOrder(order);
         }
 
         // DELETE api/<OrdersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        public ResponseMessage DeleteOrder(DeleteOrderVM deleteOrder)
         {
+            return _orderService.DeleteOrder(deleteOrder);
         }
     }
 }

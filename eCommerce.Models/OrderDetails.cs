@@ -22,6 +22,7 @@ namespace eCommerce.Models
         public Int16 Quantity { get; set; }
         public Single Discount { get; set; }
 
+        public bool IsActive { get; set; }
         [JsonIgnore]
         public virtual Orders Orders { get; set; }
     }

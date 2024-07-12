@@ -29,6 +29,8 @@ namespace eCommerce.Models
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
 
+        public bool IsActive { get; set; }
+
         public virtual ICollection<OrderDetails> _OrderDetails { get; set; }
 
         

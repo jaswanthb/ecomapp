@@ -67,9 +67,57 @@ namespace eCommerce.Service
             }
             return null;
         }
-        public bool DeleteOrder(Orders orders)
+        public ResponseMessage DeleteOrder(DeleteOrderVM deleteOrder)
         {
-            throw new NotImplementedException();
+            ResponseMessage deleteOrderResp = new ResponseMessage();
+            try
+            {
+                var order = _dbContext.Orders.FirstOrDefault(o => o.OrderID == deleteOrder.OrderID);
+                if (order != null)
+                {
+                    if (!deleteOrder.IsActive)
+                    {
+                        order.IsActive = false;
+                        foreach (var od in order._OrderDetails)
+                        {
+                            od.IsActive = false;
+                        }
+                    }
+                    else
+                    {
+                        foreach (var k in deleteOrder.OrderDetails)
+                        {
+                            if (order._OrderDetails.Any(od => od.OrderDetailsId == k.Key) && k.Value == false)
+                            {
+                                order._OrderDetails.FirstOrDefault(ods => ods.OrderDetailsId == k.Key).IsActive = false;
+                            }
+                        }
+                    }
+                    _dbContext.Orders.Update(order);
+                    _dbContext.SaveChanges();
+
+                    var orderConditional = _dbContext.Orders.FirstOrDefault(o => o.OrderID == deleteOrder.OrderID);
+                    if (orderConditional._OrderDetails.Count(o => o.IsActive == false) == orderConditional._OrderDetails.Count)
+                    {
+                        orderConditional.IsActive = false;
+                        _dbContext.Orders.Update(orderConditional);
+                        _dbContext.SaveChanges();
+                    }
+                   
+
+                    deleteOrderResp.IsError = false;
+                    return deleteOrderResp;
+                }
+                deleteOrderResp.IsError = true;
+                deleteOrderResp.ErrorMessage = $"The order with order id {deleteOrder.OrderID} does not exist";
+                return deleteOrderResp;
+            }
+            catch(Exception ex)
+            {
+                deleteOrderResp.IsError = true;
+                deleteOrderResp.ErrorMessage = $"Something Went Wrong while delete";
+                return deleteOrderResp;
+            }
         }
 
         public List<Orders> GetOrders(string searchString)
@@ -118,8 +166,10 @@ namespace eCommerce.Service
         {
             Orders updateOrder = new Orders();
             updateOrder.OrderID = orders.OrderID;
+            updateOrder.CustomerID = orders.CustomerID;
             updateOrder.OrderDate = orders.OrderDate;
             updateOrder.RequiredDate = orders.RequiredDate;
+            updateOrder.ShippedDate = orders.ShippedDate;
             updateOrder.Freight = orders.Freight;
             updateOrder.ShipName = orders.ShipName;
             updateOrder.ShipAddress = orders.ShipAddress;
@@ -127,6 +177,7 @@ namespace eCommerce.Service
             updateOrder.ShipRegion = orders.ShipRegion;
             updateOrder.ShipPostalCode = orders.ShipPostalCode;
             updateOrder.ShipCountry = orders.ShipCountry;
+            updateOrder.IsActive = orders.IsActive; 
 
             var updateOrderDetails = new List<OrderDetails>();
             foreach(var order in orders.OrderDetails)
@@ -136,6 +187,7 @@ namespace eCommerce.Service
                 orderDetails.OrderDetailsId = order.OrderDetailsId;
                 orderDetails.ProductID = order.ProductID;
                 orderDetails.Quantity = order.Quantity;
+                orderDetails.IsActive = order.IsActive;
                 updateOrderDetails.Add(orderDetails);
             }
             updateOrder._OrderDetails = updateOrderDetails;
