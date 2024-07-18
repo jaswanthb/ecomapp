@@ -17,3 +17,6 @@
 /eCommerceService/obj
 *.user
 /eCommerceDB/eCommerce.DB.dbmdl
+/eCommerce.Razor/bin/Debug/net8.0
+/eCommerce.Razor/obj
+/eCommerce.Razor/wwwroot
