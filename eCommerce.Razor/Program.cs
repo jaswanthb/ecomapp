@@ -10,14 +10,13 @@ builder.Logging.AddConsole(); // add console log
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-
-
 var connectionString = builder.Configuration.GetConnectionString("eCommerceConStr");
 builder.Services.AddDbContext<eCommerceContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IDistributedCache, DistributedCache>();
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore

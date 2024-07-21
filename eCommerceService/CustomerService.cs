@@ -2,6 +2,7 @@
 using eCommerce.Models.ViewModels;
 using eCommerce.Service.Contracts;
 using eCommerceRepository;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
 namespace eCommerce.Service
@@ -10,10 +11,12 @@ namespace eCommerce.Service
     {
         private readonly eCommerceContext _dbContext;
         private readonly ILogger<CustomerService> _logger; // Default logging to console
-        public CustomerService(eCommerceContext dbContext, ILogger<CustomerService> logger)
+        private IMemoryCache _memoryCache;
+        public CustomerService(eCommerceContext dbContext, ILogger<CustomerService> logger, IMemoryCache memoryCache)
         {
             _dbContext = dbContext;
             _logger = logger;
+            _memoryCache = memoryCache;
         }
 
         public ResponseMessage CreateCustomer(Customers customer)
@@ -119,20 +122,25 @@ namespace eCommerce.Service
             try
             {
                 _logger.LogInformation("Get Customers called.");
-                var custList = from c in _dbContext.Customers
-                               where c.CustomerCode.Contains(searchParam)
-                               select c;
+                var data = _memoryCache.Get<List<Customers>>("customers");
+                if(data is null)
+                {
+                    var custList = from c in _dbContext.Customers
+                                   where c.CustomerCode.Contains(searchParam)
+                                   select c;
 
-                _logger.LogInformation("Get Customers got data.");
+                    _logger.LogInformation("Get Customers got data.");
 
-                return _dbContext.Customers.Where(c => c.CustomerCode.Contains(searchParam)).ToList();
+                    data = _dbContext.Customers.Where(c => c.CustomerCode.Contains(searchParam)).ToList();
+                    _memoryCache.Set("customers", data);
+                }
+                return data;
             }
             catch (Exception ex)
             {
                 _logger.LogError("Message:"+ex.Message, ex);
                 return null;
             }
-
         }
     }
 }

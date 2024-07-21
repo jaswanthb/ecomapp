@@ -53,6 +53,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 //                             .CreateLogger()
 //                             );
 
+//https://github.com/serilog/serilog-aspnetcore
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
@@ -72,6 +73,10 @@ Log.Logger = new LoggerConfiguration()
 //builder.Services.AddTransient<ICustomerService, CustomerService>();
 
 //builder.Services.AddSingleton<ICustomerService, CustomerService>();
+
+builder.Services.AddMemoryCache();
+
+builder.Services.AddDistributedMemoryCache();
 
 var app = builder.Build();
 
