@@ -1,24 +1,27 @@
+using eCommerce.App.Helpers;
 using eCommerce.Service;
 using eCommerce.Service.Contracts;
 using eCommerceRepository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Proxies;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Events;
+using System.Configuration;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddTransient<AuthService>();
 
 // Add services to the container.
-
-builder.Logging.ClearProviders(); // Clear loggin providers
-//Log.Logger = new LoggerConfiguration()
-//                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-//                .Enrich.FromLogContext()
-//                .WriteTo.Console()
-//                .CreateBootstrapLogger();
-
+builder.Logging.ClearProviders();
 builder.Services.AddSerilog();
 
+//Add Memory Cache capability
+builder.Services.AddMemoryCache();
+//Add Distributed Cache capability
+builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -30,28 +33,30 @@ builder.Services.AddDbContext<eCommerceContext>(options => options
                                                 .UseLazyLoadingProxies()
                                                 .UseSqlServer(connectionString));
 
-builder.Services.AddScoped<ICustomerService, CustomerService>();
-builder.Services.AddScoped<ISupplierService, SupplierService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
 
-//builder.Services.AddSerilog((services, lc) => lc
-//                             .ReadFrom.Configuration(builder.Configuration)
-//                             .ReadFrom.Services(services)
-//                             .Enrich.FromLogContext()
-//                             .WriteTo.Console()
-//                             .WriteTo.File(System.IO.Path.Combine("C:\\SeriLog-Sample", "LogFiles", "Application", "diagnostics.txt"),
-//                                           rollingInterval: RollingInterval.Day,
-//                                           fileSizeLimitBytes: 10 * 1024 * 1024,
-//                                           retainedFileCountLimit: 2,
-//                                           rollOnFileSizeLimit: true,
-//                                           shared: true,
-//                                            flushToDiskInterval: TimeSpan.FromSeconds(1))
-//                             .CreateLogger()
-//                             );
+builder.Services.AddAuthentication(x =>
+                {
+                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(x =>
+                {
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Helper.PrivateKey)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
+builder.Services.AddAuthorization();
+
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<ISupplierService, SupplierService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IDistributedCache, DistributedCache>();
 
 //https://github.com/serilog/serilog-aspnetcore
 Log.Logger = new LoggerConfiguration()
@@ -70,14 +75,6 @@ Log.Logger = new LoggerConfiguration()
        flushToDiskInterval: TimeSpan.FromSeconds(1))
     .CreateLogger();
 
-//builder.Services.AddTransient<ICustomerService, CustomerService>();
-
-//builder.Services.AddSingleton<ICustomerService, CustomerService>();
-
-builder.Services.AddMemoryCache();
-
-builder.Services.AddDistributedMemoryCache();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -89,6 +86,7 @@ if (app.Environment.IsDevelopment())
 app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

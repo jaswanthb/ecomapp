@@ -146,6 +146,8 @@
     </Build>
     <Build Include="Security\Permissions.sql" />
     <Build Include="dbo\GetCustomers.sql" />
+    <Build Include="dbo\Tables\Users.sql" />
+    <Build Include="dbo\Tables\UserRoles.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeployment\Script.PostDeployment.sql" />
@@ -154,5 +156,6 @@
     <None Include="PostDeployment\Scripts\TestData.sql">
       <CopyToOutputDirectory>DoNotCopy</CopyToOutputDirectory>
     </None>
+    <None Include="PostDeployment\Scripts\TestUsersWithRoles.sql" />
   </ItemGroup>
 </Project>
