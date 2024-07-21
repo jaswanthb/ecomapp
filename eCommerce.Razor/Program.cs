@@ -4,6 +4,8 @@ using eCommerceRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders(); // Clear loggin providers
+builder.Logging.AddConsole(); // add console log
 
 // Add services to the container.
 builder.Services.AddRazorPages();

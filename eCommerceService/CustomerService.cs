@@ -2,15 +2,18 @@
 using eCommerce.Models.ViewModels;
 using eCommerce.Service.Contracts;
 using eCommerceRepository;
+using Microsoft.Extensions.Logging;
 
 namespace eCommerce.Service
 {
     public class CustomerService : ICustomerService
     {
         private readonly eCommerceContext _dbContext;
-        public CustomerService(eCommerceContext dbContext)
+        private readonly ILogger<CustomerService> _logger; // Default logging to console
+        public CustomerService(eCommerceContext dbContext, ILogger<CustomerService> logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         public ResponseMessage CreateCustomer(Customers customer)
@@ -113,11 +116,23 @@ namespace eCommerce.Service
 
         public List<Customers> GetCustomers(string searchParam)
         {
-            var custList = from c in _dbContext.Customers
-                           where c.CustomerCode.Contains(searchParam)
-                           select c;
+            try
+            {
+                _logger.LogInformation("Get Customers called.");
+                var custList = from c in _dbContext.Customers
+                               where c.CustomerCode.Contains(searchParam)
+                               select c;
 
-            return _dbContext.Customers.Where(c => c.CustomerCode.Contains(searchParam)).ToList();
+                _logger.LogInformation("Get Customers got data.");
+
+                return _dbContext.Customers.Where(c => c.CustomerCode.Contains(searchParam)).ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Message:"+ex.Message, ex);
+                return null;
+            }
+
         }
     }
 }

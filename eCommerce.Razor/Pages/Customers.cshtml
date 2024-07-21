@@ -1,3 +1,39 @@
-﻿@page 
+﻿@page
+@model eCommerce.Models.Customers
+@inject ICustomerService _customerService
 @{
+    ViewData["Title"] = "Home page";
+}
+
+@{
+    var _data = _customerService.GetCustomers("");
+
+    if (_data is not null)
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Customer Code
+                    </th>
+                    <th>
+                        Company Name
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in _data)
+                {
+                    <tr>
+                        <td>
+                            @c.CustomerCode
+                        </td>
+                        <td>
+                            @c.CompanyName
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 }
