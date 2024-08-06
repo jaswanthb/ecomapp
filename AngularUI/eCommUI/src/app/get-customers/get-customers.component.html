@@ -1,0 +1,32 @@
+<p>get-customers works!</p>
+
+
+<button (click)="getCustomers()"> Get Customers</button>
+
+<table>
+    <thead>
+        <tr>
+            <td>
+                Name
+            </td>
+            <td>
+                Email
+            </td>
+            <td>
+                Phone
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @for(u of customers; track $index){
+            <tr>
+                
+                <td>{{u.name}}</td>
+                <td>{{u.email}}</td>
+                <td>{{u.phone}}</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

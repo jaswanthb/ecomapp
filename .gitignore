@@ -20,7 +20,8 @@
 /eCommerce.Razor/bin/Debug/net8.0
 /eCommerce.Razor/obj
 /eCommerce.Razor/wwwroot
-eCommerce.Razor/bin
-eCommerceApp.Tests/bin
-eCommerceApp.Tests/obj
-eCommerceApp/Properties/PublishProfiles
+/eCommerceApp.Tests/bin
+/eCommerceApp.Tests/obj
+/eCommerceApp/Properties/PublishProfiles
+/AngularUI/eCommUI/.vscode
+/eCommerce.Razor/bin
