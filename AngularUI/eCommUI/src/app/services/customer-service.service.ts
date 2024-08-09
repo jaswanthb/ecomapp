@@ -9,10 +9,11 @@ export class CustomerServiceService {
   constructor(private httpClient: HttpClient) { }
 
   getCustomers(){
-    return this.httpClient.get("https://jsonplaceholder.typicode.com/users");
+    return this.httpClient.get("https://localhost:7056/api/Customer/customers?searchParam=a");
   }
 
   insertCustomer(payload: any){
-    return this.httpClient.post("https://jsonplaceholder.typicode.com/users",payload);
+    return this.httpClient.post('https://localhost:7056/api/Customer/customers',payload);
   }
+  
 }

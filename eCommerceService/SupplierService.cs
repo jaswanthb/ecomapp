@@ -14,25 +14,25 @@ namespace eCommerce.Service
     public class SupplierService : ISupplierService
     {
         private readonly eCommerceContext _dbContext;
-        private readonly IDistributedCache _distributedCache;
-        public SupplierService(eCommerceContext dbContext, IDistributedCache distributedCache)
+        //private readonly IDistributedCache _distributedCache;
+        public SupplierService(eCommerceContext dbContext /*IDistributedCache distributedCache*/)
         {
             _dbContext = dbContext;
-            _distributedCache = distributedCache;
+            //_distributedCache = distributedCache;
         }
 
         public List<Suppliers> GetSuppliers(string searchString)
         {
-            var supplierData = _distributedCache.GetData<List<Suppliers>>("suppliers");
-            if (supplierData is null)
-            {
-                supplierData = _dbContext.Suppliers.Where(s => s.CompanyName.Contains(searchString)
+            //var supplierData = _distributedCache.GetData<List<Suppliers>>("suppliers");
+            //if (supplierData is null)
+            //{
+               var supplierData = _dbContext.Suppliers.Where(s => s.CompanyName.Contains(searchString)
                                                  || s.ContactName.Contains(searchString)
                                                  || s.City.Contains(searchString))
                                          .ToList();
 
-                _distributedCache.SetData("suppliers", supplierData, DateTimeOffset.Now.AddMinutes(5.0));
-            }
+                //_distributedCache.SetData("suppliers", supplierData, DateTimeOffset.Now.AddMinutes(5.0));
+            //}
             return supplierData;
         }
         public ResponseMessage InsertSupplier(Suppliers supplier)

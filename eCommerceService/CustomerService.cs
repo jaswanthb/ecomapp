@@ -123,7 +123,7 @@ namespace eCommerce.Service
             {
                 _logger.LogInformation("Get Customers called.");
                 var data = _memoryCache.Get<List<Customers>>("customers");
-                if(data is null)
+                if(data is null || data.Count == 0)
                 {
                     var custList = from c in _dbContext.Customers
                                    where c.CustomerCode.Contains(searchParam)

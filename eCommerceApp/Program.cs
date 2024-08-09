@@ -14,6 +14,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddTransient<AuthService>();
 
+builder.Services.AddCors();
 // Add services to the container.
 builder.Logging.ClearProviders();
 builder.Services.AddSerilog();
@@ -21,7 +22,7 @@ builder.Services.AddSerilog();
 //Add Memory Cache capability
 builder.Services.AddMemoryCache();
 //Add Distributed Cache capability
-builder.Services.AddDistributedMemoryCache();
+//builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -56,7 +57,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IDistributedCache, DistributedCache>();
+//builder.Services.AddScoped<IDistributedCache, DistributedCache>();
 
 //https://github.com/serilog/serilog-aspnetcore
 Log.Logger = new LoggerConfiguration()
@@ -89,7 +90,12 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseCors(d => d.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
 app.MapControllers();
+
+
+
 
 app.UseSerilogRequestLogging();
 

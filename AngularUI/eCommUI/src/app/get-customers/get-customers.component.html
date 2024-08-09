@@ -1,5 +1,6 @@
 <p>get-customers works!</p>
 
+<button (click)="insertCustomer()"> Insert Cust</button>
 
 <button (click)="getCustomers()"> Get Customers</button>
 
@@ -7,13 +8,10 @@
     <thead>
         <tr>
             <td>
-                Name
+                Customer Code
             </td>
             <td>
-                Email
-            </td>
-            <td>
-                Phone
+                Company Name
             </td>
         </tr>
     </thead>
@@ -22,9 +20,8 @@
         @for(u of customers; track $index){
             <tr>
                 
-                <td>{{u.name}}</td>
-                <td>{{u.email}}</td>
-                <td>{{u.phone}}</td>
+                <td>{{u.customerCode}}</td>
+                <td>{{u.companyName}}</td>
             </tr>
         }
 

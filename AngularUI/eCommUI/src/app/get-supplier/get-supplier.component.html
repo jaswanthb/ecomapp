@@ -1,0 +1,29 @@
+<button (click)="getSuppliers()"> Get Supplier</button>
+
+<table>
+    <thead>
+        <tr>
+            <td>
+                CompanyName
+            </td>
+            <td>
+                ContactName
+            </td>
+            <td>
+                City
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @for(u of suppliers; track $index){
+            <tr>
+                
+                <td>{{u.companyName}}</td>
+                <td>{{u.contactName}}</td>
+                <td>{{u.city}}</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

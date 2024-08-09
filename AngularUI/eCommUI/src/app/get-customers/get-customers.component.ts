@@ -12,6 +12,7 @@ export class GetCustomersComponent {
   constructor(private customerService: CustomerServiceService){}
 
   customers: any[] = [];
+  responseMsg: any={};
 
   getCustomers(){
     //debugger;
@@ -22,4 +23,39 @@ export class GetCustomersComponent {
     console.log("res",res);
     //show some edit btn/deletes
   }
+  insertCustomer()
+  {
+    var payload = 
+    {
+      "customerID": 94,
+      "customerCode": "AAASA",
+      "companyName": "TCS",
+      "contactName": "Aravind",
+      "contactTitle": "Aravind",
+      "address": "Kondapur",
+      "city": "Hyderabad",
+      "region": "string",
+      "postalCode": "string",
+      "country": "string",
+      "phone": "string",
+      "fax": "string",
+      "isActive": true
+    };
+    this.customerService.insertCustomer(payload).subscribe(data => {
+    this.responseMsg=data as RespMsg;
+    if(this.responseMsg.isError == false){
+      alert("Customer Inserted Successfully");
+    }
+    else{
+      alert("Something Went Wrong " + this.responseMsg.errorMessage);
+    }
+    });
+  }
+
 }
+export interface RespMsg
+{
+  isError:boolean;
+  errorMessage:string;
+}
+
