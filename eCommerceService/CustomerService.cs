@@ -67,6 +67,7 @@ namespace eCommerce.Service
                     res.PostalCode = customer.PostalCode;
                     res.Country = customer.Country;
                     res.Fax = customer.Fax;
+                    res.IsActive = customer.IsActive;
 
                     _dbContext.Customers.Update(res);
                     _dbContext.SaveChanges();

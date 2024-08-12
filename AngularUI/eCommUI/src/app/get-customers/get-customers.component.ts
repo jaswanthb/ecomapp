@@ -51,7 +51,45 @@ export class GetCustomersComponent {
     }
     });
   }
+  updateCustomer(){
+    var payload = 
+    {
+  "customerID": 93,
+  "customerCode": "string",
+  "companyName": "string",
+  "contactName": "string",
+  "contactTitle": "string",
+  "address": "string",
+  "city": "string",
+  "region": "string",
+  "postalCode": "string",
+  "country": "string",
+  "phone": "string",
+  "fax": "string",
+  "isActive": true
+    };
+    this.customerService.updateCustomer(payload).subscribe(data => {
+      this.responseMsg=data as RespMsg;
+      if(this.responseMsg.isError == false){
+        alert("Customer Updated Successfully");
+      }
+      else{
+        alert("Something Went Wrong " + this.responseMsg.errorMessage);
+      }
+    });
+  }
 
+  deleteCustomer(){
+    this.customerService.deleteCustomer('string1').subscribe(data => {
+      this.responseMsg=data as RespMsg
+      if(this.responseMsg.isError == false){
+          alert("Customer Deleted Successfully");
+      }
+      else{
+        alert("Something Went Wrong "+ this.responseMsg.errorMessage)
+      }
+  });  
+  }
 }
 export interface RespMsg
 {
