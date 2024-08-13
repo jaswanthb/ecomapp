@@ -22,6 +22,6 @@ export class SupplierService {
     return this.httpClient.put("https://localhost:7056/api/Suppliers/suppliers",payload)
   }
   deleteSupplier(payload: any){
-    return this.httpClient.delete("https://localhost:7056/api/Suppliers/suppliers?supplierId"+payload)
+    return this.httpClient.delete("https://localhost:7056/api/Suppliers/suppliers?supplierId="+payload)
   }
 }

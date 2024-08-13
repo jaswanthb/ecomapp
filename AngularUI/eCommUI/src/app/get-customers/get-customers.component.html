@@ -1,12 +1,11 @@
-<p>get-customers works!</p>
+<br>
 
-<!-- <button (click)="insertCustomer()"> Insert Cust</button> -->
+<button  class="button-68" role="button" (click)="insertCustomer()">New Customer</button>
 
-<!-- <button (click)="getCustomers()"> Get Customers</button> -->
-
-<button (click)="updateCustomer()">Update Customer</button>
-
-<table>
+<br>
+<br>
+@if(showGrid){
+<table class="content-table">
     <thead>
         <tr>
             <td>
@@ -14,6 +13,9 @@
             </td>
             <td>
                 Company Name
+            </td>
+            <td>
+                Action
             </td>
         </tr>
     </thead>
@@ -24,12 +26,15 @@
                 
                 <td>{{u.customerCode}}</td>
                 <td>{{u.companyName}}</td>
+                <td>
+                    <button  class="button-68" role="button" (click)="updateCustomer()"><fa-icon [icon]="faEdit"></fa-icon></button>
+                    <button  class="button-68" role="button" (click)="deleteCustomer()"><fa-icon [icon]="faTrash"></fa-icon></button>
+                   
+                </td>
             </tr>
         }
 
     </tbody>
 </table>
-
-<button (click)="deleteCustomer()">Delete Customer</button>
-
+}
   

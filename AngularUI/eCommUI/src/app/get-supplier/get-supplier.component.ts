@@ -23,7 +23,7 @@ export class GetSupplierComponent {
   insertSupplier(){
     var payload = 
     {
-      "supplierID": 32,
+      "supplierID": 0,
   "companyName": "AAAA",
   "contactName": "AAAAA",
   "contactTitle": "sg",
@@ -77,7 +77,7 @@ export class GetSupplierComponent {
   }
 
   deleteSupplier(){
-    this.supplierService.deleteSupplier('31').subscribe(data => {
+    this.supplierService.deleteSupplier(32).subscribe(data => {
       this.responseMsg=data as RespMsg
       if(this.responseMsg.isError == false){
         alert("Supplier Deleted Successfully");

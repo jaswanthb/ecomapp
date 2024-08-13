@@ -5,12 +5,12 @@ import { GetSupplierComponent } from './get-supplier/get-supplier.component';
 
 export const routes: Routes = [
     {
-        path:"getCustomer",component:GetCustomersComponent
+        path:"customers",component:GetCustomersComponent
     },
     {
         path:"home",component:AppComponent
     },
     {
-        path:"getSupplier",component:GetSupplierComponent
+        path:"suppliers",component:GetSupplierComponent
     }
 ];

@@ -1,27 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CustomerServiceService } from '../services/customer-service.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faTrash,faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-get-customers',
   standalone: true,
-  imports: [],
+  imports: [FontAwesomeModule],
   templateUrl: './get-customers.component.html',
   styleUrl: './get-customers.component.css'
 })
-export class GetCustomersComponent {
+export class GetCustomersComponent implements OnInit {
   constructor(private customerService: CustomerServiceService){}
-
+  faTrash = faTrash;
+  faEdit = faEdit;
   customers: any[] = [];
   responseMsg: any={};
+  showGrid:boolean=false;
+  public ngOnInit(): void 
+  {
+  this.getCustomers();
+  }
 
   getCustomers(){
-    //debugger;
-    var res = this.customerService.getCustomers().subscribe(data => {
+    this.customerService.getCustomers().subscribe(data => {
       this.customers = data as any[];
-      console.log("custResponse",this.customers);
+      this.showGrid=true;
     });
-    console.log("res",res);
-    //show some edit btn/deletes
   }
   insertCustomer()
   {
