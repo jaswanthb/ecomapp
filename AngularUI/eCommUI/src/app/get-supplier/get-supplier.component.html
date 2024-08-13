@@ -1,6 +1,10 @@
-<button (click)="getSuppliers()"> Get Supplier</button>
+<br>
 
-<table>
+<button class="button-68" role="button" (click)="insertSupplier()">New Supplier</button>
+<br>
+<br>
+@if(showGrid){
+<table class="content-table">
     <thead>
         <tr>
             <td>
@@ -21,15 +25,14 @@
                 
                 <td>{{u.companyName}}</td>
                 <td>{{u.contactName}}</td>
-                <td>{{u.city}}</td>
+                <td>
+                    <button  class="button-68" role="button" (click)="updateSupplier()"><fa-icon [icon]="faEdit"></fa-icon></button>
+                    <button  class="button-68" role="button" (click)="deleteSupplier()"><fa-icon [icon]="faTrash"></fa-icon></button>
+                </td>
+
             </tr>
         }
 
     </tbody>
 </table>
-
-<button (click)="insertSupplier()">Insert Supplier</button>
-<br>
-<button (click)="updateSupplier()">Update Supplier</button>
-<br>
-<button (click)="deleteSupplier()">Delete Supplier</button>
+}
