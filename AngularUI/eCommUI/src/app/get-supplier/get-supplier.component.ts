@@ -2,16 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { SupplierService } from '../services/supplier.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTrash,faEdit, faL } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute,Router,ParamMap,RouterModule } from '@angular/router';
+import { ResponseMessage } from '../models/ResponseMessage';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-get-supplier',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule,RouterModule],
   templateUrl: './get-supplier.component.html',
   styleUrl: './get-supplier.component.css'
 })
 export class GetSupplierComponent implements OnInit{
-  constructor(private supplierService : SupplierService){}
+  constructor(private supplierService : SupplierService,
+              private route: ActivatedRoute,
+              private router: Router
+  ){}
   faTrash = faTrash;
   faEdit = faEdit;
   suppliers: any[]=[];
@@ -46,7 +52,7 @@ export class GetSupplierComponent implements OnInit{
   "isActive": true
     };
     this.supplierService.insertSupplier(payload).subscribe(data => {
-      this.responseMsg=data as RespMsg;
+      this.responseMsg=data as ResponseMessage;
       if(this.responseMsg.isError == false){
         alert("Supplier Inserted Successfully");
       }
@@ -56,7 +62,8 @@ export class GetSupplierComponent implements OnInit{
     });
   }
 
-  updateSupplier(){
+  updateSupplier(supId: number){
+    console.log(supId);
     var payload =
     {
       "supplierID": 31,
@@ -74,7 +81,7 @@ export class GetSupplierComponent implements OnInit{
       "isActive": true
     };
     this.supplierService.updateSupplier(payload).subscribe(data => {
-      this.responseMsg=data as RespMsg;
+      this.responseMsg=data as ResponseMessage;
       if(this.responseMsg.isError == false){
         alert("Supplier Updated Succesfully");
       }
@@ -86,7 +93,7 @@ export class GetSupplierComponent implements OnInit{
 
   deleteSupplier(){
     this.supplierService.deleteSupplier(32).subscribe(data => {
-      this.responseMsg=data as RespMsg
+      this.responseMsg=data as ResponseMessage
       if(this.responseMsg.isError == false){
         alert("Supplier Deleted Successfully");
       }
@@ -95,10 +102,8 @@ export class GetSupplierComponent implements OnInit{
       }
     });
   }
-}
 
-export interface RespMsg 
-{
-  isError:boolean;
-  errorMessage:string;
+  newSupplier(){
+    this.router.navigate(['new-supplier'])
+  }
 }

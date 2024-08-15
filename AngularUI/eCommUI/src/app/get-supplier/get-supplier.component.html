@@ -1,6 +1,7 @@
 <br>
 
 <button class="button-68" role="button" (click)="insertSupplier()">New Supplier</button>
+
 <br>
 <br>
 @if(showGrid){
@@ -14,7 +15,7 @@
                 ContactName
             </td>
             <td>
-                City
+                Action
             </td>
         </tr>
     </thead>
@@ -26,7 +27,11 @@
                 <td>{{u.companyName}}</td>
                 <td>{{u.contactName}}</td>
                 <td>
-                    <button  class="button-68" role="button" (click)="updateSupplier()"><fa-icon [icon]="faEdit"></fa-icon></button>
+                    <!-- <button  class="button-68" role="button" (click)="updateSupplier()"><fa-icon [icon]="faEdit"></fa-icon></button> -->
+
+                    <a [routerLink]="['/edit-supplier', u.supplierID]"><fa-icon [icon]="faEdit"></fa-icon></a>
+                    
+
                     <button  class="button-68" role="button" (click)="deleteSupplier()"><fa-icon [icon]="faTrash"></fa-icon></button>
                 </td>
 

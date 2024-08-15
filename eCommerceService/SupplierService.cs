@@ -35,6 +35,13 @@ namespace eCommerce.Service
             //}
             return supplierData;
         }
+
+        public Suppliers GetSupplierById(int id)
+        {
+            Suppliers sup = _dbContext.Suppliers.First(s => s.SupplierID == id);    
+            return sup ?? new Suppliers();
+        }
+
         public ResponseMessage InsertSupplier(Suppliers supplier)
         {
             ResponseMessage supplierInsertMessage = new ResponseMessage();

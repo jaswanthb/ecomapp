@@ -26,6 +26,14 @@ namespace eCommerceApp.Controllers
             return _supplierService.GetSuppliers(searchQuery);
         }
 
+        [HttpGet]
+        [Route("suppliers/{id}")]
+
+        public Suppliers GetSupplier(int id)
+        {
+            return _supplierService.GetSupplierById(id);
+        }
+
         [HttpPost("Suppliers")]
         public ResponseMessage InsertSupplier(Suppliers supplier)
         {

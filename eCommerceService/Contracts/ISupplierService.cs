@@ -12,6 +12,8 @@ namespace eCommerce.Service.Contracts
     {
         List<Suppliers> GetSuppliers(string searchString);
 
+        Suppliers GetSupplierById(int id);
+
         ResponseMessage InsertSupplier(Suppliers suppier);
 
         ResponseMessage UpdateSupplier(Suppliers supplier);

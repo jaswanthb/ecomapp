@@ -14,6 +14,11 @@ export class SupplierService {
       return this.httpClient.get("https://localhost:7056/api/Suppliers/suppliers?searchQuery=a")  
   }
 
+  getSupplierById(id: number)
+  {
+    return this.httpClient.get("https://localhost:7056/api/Suppliers/suppliers/"+id);
+  }
+
   insertSupplier(payload: any) {
     return this.httpClient.post("https://localhost:7056/api/Suppliers/suppliers",payload)
   }
