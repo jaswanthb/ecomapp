@@ -12,6 +12,10 @@ export class CustomerServiceService {
     return this.httpClient.get("https://localhost:7056/api/Customer/customers?searchParam=a");
   }
 
+  getCustomerById(id: number){
+    return this.httpClient.get("https://localhost:7056/api/Customer/customers/"+id);
+  }
+
   insertCustomer(payload: any){
     return this.httpClient.post('https://localhost:7056/api/Customer/customers',payload);
   }

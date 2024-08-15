@@ -4,6 +4,7 @@ using eCommerce.Service.Contracts;
 using eCommerceRepository;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace eCommerce.Service
 {
@@ -45,6 +46,12 @@ namespace eCommerce.Service
                 createCustResponseMes.ErrorMessage = $"Something went wrong creating customer{customer.CompanyName}";
                 return createCustResponseMes;
             }
+        }
+
+        public Customers GetCustomerById(int id)
+        {
+            Customers cust = _dbContext.Customers.First(c => c.CustomerID == id);
+            return cust ?? new Customers();
         }
 
         public ResponseMessage UpdateCustomer(Customers customer)

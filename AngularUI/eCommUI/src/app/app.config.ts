@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { CustomerServiceService } from './services/customer-service.service';
@@ -10,7 +10,7 @@ import { SupplierService } from './services/supplier.service';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
     {provide: CustomerServiceService},
     {provide: SupplierService},
     provideHttpClient()

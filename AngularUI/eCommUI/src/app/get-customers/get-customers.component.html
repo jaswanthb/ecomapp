@@ -1,6 +1,6 @@
 <br>
 
-<button  class="button-68" role="button" (click)="insertCustomer()">New Customer</button>
+<button  class="button-68" role="button" (click)="newCustomer()">New Customer</button>
 
 <br>
 <br>
@@ -27,7 +27,10 @@
                 <td>{{u.customerCode}}</td>
                 <td>{{u.companyName}}</td>
                 <td>
-                    <button  class="button-68" role="button" (click)="updateCustomer()"><fa-icon [icon]="faEdit"></fa-icon></button>
+                    <!-- <button  class="button-68" role="button" (click)="updateCustomer(u.customerCode)"><fa-icon [icon]="faEdit"></fa-icon></button> -->
+                    
+                    <a [routerLink]="['/edit-customer', u.customerID]"><fa-icon [icon]="faEdit"></fa-icon></a>
+                    
                     <button  class="button-68" role="button" (click)="deleteCustomer()"><fa-icon [icon]="faTrash"></fa-icon></button>
                    
                 </td>

@@ -2,16 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerServiceService } from '../services/customer-service.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTrash,faEdit } from '@fortawesome/free-solid-svg-icons';
-
+import { ActivatedRoute,Router,ParamMap, RouterModule } from '@angular/router';
+import {ResponseMessage} from '../models/ResponseMessage';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-get-customers',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, RouterModule],
   templateUrl: './get-customers.component.html',
   styleUrl: './get-customers.component.css'
 })
 export class GetCustomersComponent implements OnInit {
-  constructor(private customerService: CustomerServiceService){}
+  constructor(private customerService: CustomerServiceService,
+              private route: ActivatedRoute,
+              private router: Router
+  ){}
   faTrash = faTrash;
   faEdit = faEdit;
   customers: any[] = [];
@@ -47,7 +52,7 @@ export class GetCustomersComponent implements OnInit {
       "isActive": true
     };
     this.customerService.insertCustomer(payload).subscribe(data => {
-    this.responseMsg=data as RespMsg;
+    this.responseMsg=data as ResponseMessage;
     if(this.responseMsg.isError == false){
       alert("Customer Inserted Successfully");
     }
@@ -56,7 +61,8 @@ export class GetCustomersComponent implements OnInit {
     }
     });
   }
-  updateCustomer(){
+  updateCustomer(custId: number){
+    console.log(custId);
     var payload = 
     {
   "customerID": 93,
@@ -74,7 +80,7 @@ export class GetCustomersComponent implements OnInit {
   "isActive": true
     };
     this.customerService.updateCustomer(payload).subscribe(data => {
-      this.responseMsg=data as RespMsg;
+      this.responseMsg=data as ResponseMessage;
       if(this.responseMsg.isError == false){
         alert("Customer Updated Successfully");
       }
@@ -86,7 +92,7 @@ export class GetCustomersComponent implements OnInit {
 
   deleteCustomer(){
     this.customerService.deleteCustomer('string1').subscribe(data => {
-      this.responseMsg=data as RespMsg
+      this.responseMsg=data as ResponseMessage
       if(this.responseMsg.isError == false){
           alert("Customer Deleted Successfully");
       }
@@ -95,10 +101,9 @@ export class GetCustomersComponent implements OnInit {
       }
   });  
   }
-}
-export interface RespMsg
-{
-  isError:boolean;
-  errorMessage:string;
+
+  newCustomer(){
+    this.router.navigate(['new-customer'])
+  }
 }
 

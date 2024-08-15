@@ -6,6 +6,7 @@ namespace eCommerce.Service.Contracts
     public interface ICustomerService
     {
         List<Customers> GetCustomers(string searchParam);
+        Customers GetCustomerById(int id);
 
         ResponseMessage CreateCustomer(Customers customer);
 

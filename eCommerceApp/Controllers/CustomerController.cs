@@ -26,6 +26,13 @@ namespace eCommerceApp.Controllers
             return cust;
         }
 
+        [HttpGet]
+        [Route("customers/{id}")]
+        public Customers GetCustomer(int id)
+        {
+            return _customerService.GetCustomerById(id);
+        }
+
         [HttpPost]
         [Route("customers")]
         public ResponseMessage CreateCustomer(Customers customer)
