@@ -8,8 +8,6 @@ node sample.js //run js file
 
 */
 
-
-
 //Data types, let and var
 
 var num: number = 10;
@@ -23,13 +21,12 @@ anytype = 1004;
 var dontknow: unknown = "hey";
 dontknow = anytype;
 
-
-// console.log(num);
-// console.log(str);
-// console.log(decim);
-// console.log(bool);
-// console.log(anytype);
-// console.log(dontknow);
+console.log(num);
+console.log(str);
+console.log(decim);
+console.log(bool);
+console.log(anytype);
+console.log(dontknow);
 
 let a1: number = 100; //blocked scope
 var b1: number = 200;//global/function scope
@@ -45,7 +42,7 @@ if (true) {
 console.log(a1);
 console.log(b1);
 
-//Hoisting
+//Hoisting -- browser moves all the global scoped variables to top but not values assigned
 
 var testvar;
 

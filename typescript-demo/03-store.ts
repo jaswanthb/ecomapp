@@ -1,14 +1,14 @@
 //Generics
 
-type customeType = string|number; // Custom type declaration of what Store class 
-//can extend: either string or number 
+type customeType = string | number; // Custom type declaration of what Store class 
+//can extend: either string or number or other datatype
 
 class Store<T extends customeType> {
     private list: T[];
     //private list: Array<T>; // Can be delcared in this 2 ways
 
     constructor() {
-        this.list = []; // Initialize the list as array type
+        this.list = []; // Initialize the list as array type in constructor
     }
 
     addItem(item: T) {
