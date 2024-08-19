@@ -23,7 +23,7 @@ import { supplier } from "../models/supplier";
     }
 
     ngOnInit() {
-        this.supId = this.route.snapshot.paramMap.get('companyName');
+        this.supId = this.route.snapshot.paramMap.get('id');
         if(this.supId == null){
             alert("New Supplier")
         }

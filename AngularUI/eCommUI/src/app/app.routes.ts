@@ -16,6 +16,9 @@ export const routes: Routes = [
         path:"edit-customer/:id",component:EditCustomerComponent,title:"Edit Customer"
     },
     {
+        path:"new-supplier",component:EditSupplierComponent,title:"New Supplier"
+    },
+    {
         path:"edit-supplier/:id",component:EditSupplierComponent,title:"Edit Supplier"
     },
     {
