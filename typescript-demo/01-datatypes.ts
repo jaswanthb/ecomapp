@@ -3,8 +3,12 @@
 //install node
 npm i -g typescript // install typescript compiler globally
 
+//npm will resolve the inter dependencies
+
 tsc sample.ts // Compile typescript file
 node sample.js //run js file
+
+> tsc .\01-datatypes.ts --target es6 // compile typescript with ecmascript 6 standards, default is es5 
 
 */
 

@@ -3,7 +3,7 @@
 
 export class Person {
     personId: number; // default access modifier is public
-    personName: string | undefined; //Union type
+    personName: string | undefined | number; //Union type
     personEmail: string;
 
     // constructor(){
@@ -31,6 +31,8 @@ export class Person {
 
 }
 
+export const radius: string = "This is applicable only to circle";
+
 var p = new Person();
 p.showDetails();
 
@@ -41,7 +43,7 @@ var p2 = new Person(300, "abc", "abc@test.com");
 p2.showDetails();
 
 class Employee extends Person { // Employee class is a derived class
-    isActive: boolean;
+    isActive: boolean = true;
 
     // to run derived/child class constructor, it should first run base class constructor
     constructor(pId?: number, pName?: string, pEmail?: string) {

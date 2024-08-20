@@ -8,3 +8,12 @@ export function callMe(){ // Function, class, variables or interface can be expo
 }
 
 export const PI: number = 3.14;
+
+export const radius:string="Circle";
+
+function privateFn(){
+
+}
+
+privateFn();
+console.log(radius);
