@@ -81,11 +81,17 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    //app.UseSwagger();
+    //app.UseSwaggerUI();
 }
 //app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
+
+app.Use(async (context, next) => {
+    await context.Response.WriteAsync("MiddleWare 1 \n");
+    await next();
+    await context.Response.WriteAsync("MiddleWare 1 Response \n");
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -98,5 +104,15 @@ app.MapControllers();
 
 
 app.UseSerilogRequestLogging();
+
+app.Run(async (context) => {
+    await context.Response.WriteAsync("MiddleWare with short circuit \n");
+});
+
+app.Use(async (context, next) => {
+    await context.Response.WriteAsync("MiddleWare 2 \n");
+    await next();
+    await context.Response.WriteAsync("MiddleWare 2 Response \n");
+});
 
 app.Run();

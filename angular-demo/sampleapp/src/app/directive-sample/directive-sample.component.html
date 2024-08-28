@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-lg-6 col-sm-9">
+    <p>directive-sample works!</p>
+
+<h4>Parameter Value {{id}}</h4>
+
+<h4>Query params value {{city}}, {{country}}</h4>
+
+    <h3>*ngIf Directive</h3>
+    <span>Enter a number</span>
+    <input type="text" [(ngModel)]="num" class="form-control" />
+
+    <div *ngIf="num % 2 == 0; then ifblock; else elseblock"></div>
+
+    <ng-template #ifblock>
+      <p><b>Number is Even</b></p>
+    </ng-template>
+
+    <ng-template #elseblock>
+      <p><b>Number is Odd</b></p>
+    </ng-template>
+
+    <h3>*ngFor</h3>
+
+    <ul>
+      <li *ngFor="let c of colorList">
+        {{ c }}
+      </li>
+    </ul>
+
+    <select [(ngModel)]="selectedColor">
+      <option *ngFor="let c of colorList">
+        {{ c }}
+      </option>
+    </select>
+
+    {{ selectedColor }}
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product Id</th>
+          <th>Product Code</th>
+          <th>Product Name</th>
+          <th>Product Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- [color.r1]="p.price >16000" [style.color]="red" -->
+        <tr *ngFor="let p of products" [class.r1]="p.price > 16000">
+          <!--[style.color]="selectedColor"-->
+          <td>{{ p.productId }}</td>
+          <td>{{ p.productCode }}</td>
+          <td>
+            {{ p.productName }}
+            <input
+              type="button"
+              value="Like"
+              [appFavs]="selectedColor"
+              (click)="showAlert()"
+              
+              class="btn btn-success"
+            />
+            <input
+              type="button"
+              value="Like"
+              [appFavs]="selectedColor"
+              (click)="showAlert()"
+              class="btn btn-success"
+            />
+          </td>
+          <td>
+            {{ p.price }}
+            <p *ngIf="p.price > 20000">Discount Applicable</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <input type="button" (click)="addNewProduct()" value="Add new product" />
+  </div>
+</div>

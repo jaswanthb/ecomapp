@@ -20,6 +20,16 @@ namespace eCommerce.Service
             _memoryCache = memoryCache;
         }
 
+        public CustomerService(eCommerceContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        public CustomerService()
+        {
+            
+        }
+
         public ResponseMessage CreateCustomer(Customers customer)
         {
             ResponseMessage createCustResponseMes = new ResponseMessage();
