@@ -30,6 +30,7 @@ namespace eCommerceApp.Controllers
         [Route("customers/{id}")]
         public Customers GetCustomer(int id)
         {
+            _customerService.GetCustomerById(id);
             return _customerService.GetCustomerById(id);
         }
 
@@ -37,6 +38,7 @@ namespace eCommerceApp.Controllers
         [Route("customers")]
         public ResponseMessage CreateCustomer(Customers customer)
         {
+            _customerService.CreateCustomer(customer);
             if (customer.CustomerCode.Length >20 || string.IsNullOrEmpty(customer.CustomerCode))
                 return new ResponseMessage() {IsError = true,ErrorMessage = "Customer code is empty or customercode length is greater than 20"};
 
