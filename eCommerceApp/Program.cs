@@ -31,7 +31,7 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("eCommerceConStr");
 builder.Services.AddDbContext<eCommerceContext>(options => options
-                                                .UseLazyLoadingProxies()
+                                               // .UseLazyLoadingProxies()
                                                 .UseSqlServer(connectionString));
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>

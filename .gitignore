@@ -25,3 +25,6 @@
 /eCommerceApp/Properties/PublishProfiles
 /AngularUI/eCommUI/.vscode
 /eCommerce.Razor/bin
+bin
+obj
+migrations

@@ -53,7 +53,7 @@ namespace eCommerce.Service
             catch (Exception ex)
             {
                 createCustResponseMes.IsError = true;
-                createCustResponseMes.ErrorMessage = $"Something went wrong creating customer{customer.CompanyName}";
+                createCustResponseMes.ErrorMessage = $"Something went wrong creating customer {customer.CompanyName}";
                 return createCustResponseMes;
             }
         }
@@ -144,7 +144,7 @@ namespace eCommerce.Service
                 if(data is null || data.Count == 0)
                 {
                     var custList = from c in _dbContext.Customers
-                                   where c.CustomerCode.Contains(searchParam)
+                                   where c.CustomerCode.Contains(searchParam) && c.IsActive
                                    select c;
 
                     _logger.LogInformation("Get Customers got data.");
@@ -159,6 +159,27 @@ namespace eCommerce.Service
                 _logger.LogError("Message:"+ex.Message, ex);
                 return null;
             }
+        }
+
+        public async Task<int> Getall()
+        {
+            var res1 = Async1();
+            var res2 = Async2();
+
+            var result = Task.WhenAll(res1,res2);
+
+            return result.Result.First();
+        }
+
+        private Task<int> Async1()
+        {
+            Thread.Sleep(3000);
+            return Task.FromResult(1);
+        }
+        private Task<int> Async2()
+        {
+            Thread.Sleep(3000);
+            return Task.FromResult(2);
         }
     }
 }

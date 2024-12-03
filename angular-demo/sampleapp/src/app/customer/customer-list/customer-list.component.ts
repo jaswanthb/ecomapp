@@ -12,6 +12,8 @@ export class CustomerListComponent {
   @Input('customers')
   customers: string[] | undefined;
 
+  prod: string[] |undefined;
+
   @Output('on-selection')
   onSelect: EventEmitter<string>;
 

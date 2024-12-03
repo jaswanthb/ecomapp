@@ -165,8 +165,8 @@ namespace eCommerce.Service
         public Orders UpdateOrder(OrdersVM orders)
         {
             Orders updateOrder = new Orders();
-            updateOrder.OrderID = orders.OrderID;
-            updateOrder.CustomerID = orders.CustomerID;
+           // updateOrder.OrderID = orders.OrderID;
+           // updateOrder.CustomerID = orders.CustomerID;
             updateOrder.OrderDate = orders.OrderDate;
             updateOrder.RequiredDate = orders.RequiredDate;
             updateOrder.ShippedDate = orders.ShippedDate;
@@ -183,8 +183,8 @@ namespace eCommerce.Service
             foreach(var order in orders.OrderDetails)
             {
                 var orderDetails = new OrderDetails();
-                orderDetails.OrderID = order.OrderID;
-                orderDetails.OrderDetailsId = order.OrderDetailsId;
+               // orderDetails.OrderID = order.OrderID;
+              //  orderDetails.OrderDetailsId = order.OrderDetailsId;
                 orderDetails.ProductID = order.ProductID;
                 orderDetails.Quantity = order.Quantity;
                 orderDetails.IsActive = order.IsActive;

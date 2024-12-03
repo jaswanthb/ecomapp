@@ -33,13 +33,13 @@ export class DirectiveSampleComponent {
     this.products.push(p2);
     this.products.push(p3);
 
-    this.activatedRoute.params.subscribe(data => {
-      this.id = data["id"] // Read parameters from url
+    this.activatedRoute.params.subscribe(d => {
+      this.id = d["id"] // Read parameters from url
     })
 
     this.activatedRoute.queryParams.subscribe(data => {
       this.city = data["city"];
-      this.country = data["country"];
+      this.country = data["country"]; //Read parameters from the querystring
     })
   }
 

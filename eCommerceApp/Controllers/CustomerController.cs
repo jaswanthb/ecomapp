@@ -36,13 +36,13 @@ namespace eCommerceApp.Controllers
 
         [HttpPost]
         [Route("customers")]
-        public ResponseMessage CreateCustomer(Customers customer)
+        public ActionResult<ResponseMessage> CreateCustomer(Customers customer)
         {
             _customerService.CreateCustomer(customer);
             if (customer.CustomerCode.Length >20 || string.IsNullOrEmpty(customer.CustomerCode))
                 return new ResponseMessage() {IsError = true,ErrorMessage = "Customer code is empty or customercode length is greater than 20"};
 
-            var res = _customerService.CreateCustomer(customer);
+            var res = Ok(_customerService.CreateCustomer(customer));
             return res;
         }
 

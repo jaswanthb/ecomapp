@@ -143,3 +143,61 @@ Read route parameters and routeparams with query string parameters (look for "Go
 Creating a ref of child component in parent & taking control on child component (created in Parent)
 This can also be used to access the element
 
+09 - Angular Forms
+-Template driven approach
+-Model driven approach (Reactive forms)
+
+Angular forms has control states
+Pristine state - Form load is pristine also called stable state. One way binding, once goes into dirty never comes back to pristine
+Dirty state - if form is touched then it is changed to dirty state
+untouched state - is for control when control is loaded, control state is untouched. Once way binding, once changes to touched never comes back to untouched
+touched state - when controls is touched then the state is moved to touched from untouched
+valid state - when control has validation not applied. 2 way binding, depends on the input and validation the state changes accordingly
+invalid state - when control has validation then default is invalid state, once validation is passed then control is in valid state
+
+Pristine => dirty (form)
+untouched => touched (control)
+valid <=> invalid (contorl)
+
+
+Steps to implement TemplateDriven approach (add-product component)
+- Design a form and add template ref of type "ngForm"
+   <form #frm="ngForm"></form>
+- Add input elements and provide name & ngModel attribute
+  <input type="text" class="form-control" name="productId" [(ngModel)]="product.productId" />
+- Add ngSubmit event and pass frm object 
+  (ngSubmit)="saveProduct(frm)"
+- To add a validation, use html5 attributes
+  required, pattern, email, max, min, maxlength, minlength, phone
+- To show error message
+	 <div *ngIf="frm.controls['productCode']?.errors">
+		<span class="text-danger">Product Code is mandatory</span>
+	</div>
+	
+Steps to implement Model Driven approach
+- Import a module in app.module.ts "ReactiveFormsModule"
+- Design the model in the ts code, using FormGroup & FormBuilder
+	this.frm = this.fb.group({
+      productId: this.fb.control('')
+	  })
+- Map the fromGroup & formControl in html template
+    <form [formGroup]="frm">
+            <div class="form-group">
+                <label>Product Id</label>
+                <input type="text" class="form-control" formControlName="productId" />
+            </div>
+	</form>
+- Add ngSubmit event & no need to pass formgroup obj
+  (ngSubmit)="saveProduct()"
+- To add valdiation, add in ts code
+  productCode: this.fb.control('',{updateOn:'blur', validators: [Validators.required]})
+- To show error message
+	 <div *ngIf="frm.controls['productCode']?.errors">
+		<span class="text-danger">Product Code is mandatory</span>
+	</div>
+- Easy to write unit tests 
+- Can design complex forms	
+
+10. rxjs (async programming)
+
+10 - Authentication

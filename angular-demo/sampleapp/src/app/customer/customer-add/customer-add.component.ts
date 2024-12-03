@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class CustomerAddComponent {
   customerName: string | undefined;
-  customers: string[] | undefined;
+  customers: string[];
 
   @ViewChild('custlistviewchild')
   customerListComponent: CustomerListComponent | undefined;
@@ -24,9 +24,10 @@ export class CustomerAddComponent {
     this.customers = [];
   }
   addCustomer() {
-    //this.customers.push(this.customerName ?? ""); // input decorator
+    this.customers.push(this.customerName ?? ""); // input decorator
 
     this.customerListComponent?.customers?.push(this.customerName ?? "");
+    this.customerListComponent?.prod?.push("abc");
 
     if (this.div != undefined) {
       this.div.nativeElement.innerText = "Customer Added";
@@ -35,8 +36,6 @@ export class CustomerAddComponent {
           this.div.nativeElement.innerText = "";
         }
       }, 2000);
-
-
     }
 
   }

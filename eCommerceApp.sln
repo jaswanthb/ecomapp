@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerce.Models", "eCommer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerce.Razor", "eCommerce.Razor\eCommerce.Razor.csproj", "{F61D10D5-C782-45BA-AEFD-6F3E2018080D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CancellationTknDemo", "CancellationTknDemo\CancellationTknDemo.csproj", "{647C7BC6-77DF-453C-A5A3-1889B2EF621B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{F61D10D5-C782-45BA-AEFD-6F3E2018080D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F61D10D5-C782-45BA-AEFD-6F3E2018080D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F61D10D5-C782-45BA-AEFD-6F3E2018080D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{647C7BC6-77DF-453C-A5A3-1889B2EF621B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{647C7BC6-77DF-453C-A5A3-1889B2EF621B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{647C7BC6-77DF-453C-A5A3-1889B2EF621B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{647C7BC6-77DF-453C-A5A3-1889B2EF621B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
