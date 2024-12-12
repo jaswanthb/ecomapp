@@ -62,7 +62,7 @@ store1.removeItem();
 store1.displayItem();
 
 // error due to limitation of customtype where Store can extend
-//let store2 = new Store<boolean>(); 
+//let store3 = new Store<boolean>(); 
 
 let store2 = new Store<Person>();
 
