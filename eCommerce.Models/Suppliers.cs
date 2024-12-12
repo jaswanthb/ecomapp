@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Net;
@@ -9,10 +10,12 @@ using System.Threading.Tasks;
 
 namespace eCommerce.Models
 {
+    [Table("Suppliers")]
     public class Suppliers
     {
         [Key]
-        public int? SupplierID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int SupplierID { get; set; }
         public string CompanyName { get; set; }
         public string ContactName { get; set; }
         public string ContactTitle { get; set; }
@@ -24,5 +27,7 @@ namespace eCommerce.Models
         public string Phone { get; set; }
         public string? Fax { get; set; }
         public string? HomePage { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

@@ -1,14 +1,16 @@
 ﻿using eCommerce.Models;
+using eCommerce.Models.ViewModels;
 
 namespace eCommerce.Service.Contracts
 {
     public interface ICustomerService
     {
         List<Customers> GetCustomers(string searchParam);
+        Customers GetCustomerById(int id);
 
-        Customers CreateCustomer(Customers customer);
+        ResponseMessage CreateCustomer(Customers customer);
 
-        Customers UpdateCustomer(Customers customer);
-        bool DeleteCustomer(string customerCode);
+        ResponseMessage UpdateCustomer(Customers customer);
+        ResponseMessage DeleteCustomer(string customerCode);
     }
 }

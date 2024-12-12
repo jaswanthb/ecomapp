@@ -1,0 +1,43 @@
+<br>
+
+<button  class="button-68" role="button" (click)="newCustomer()">New Customer</button>
+
+<br>
+<br>
+@if(showGrid){
+<table class="content-table">
+    <thead>
+        <tr>
+            <td>
+                Customer Code
+            </td>
+            <td>
+                Company Name
+            </td>
+            <td>
+                Action
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @for(u of customers; track $index){
+            <tr>
+                
+                <td>{{u.customerCode}}</td>
+                <td>{{u.companyName}}</td>
+                <td>
+                    <!-- <button  class="button-68" role="button" (click)="updateCustomer(u.customerCode)"><fa-icon [icon]="faEdit"></fa-icon></button> -->
+                    
+                    <a [routerLink]="['/edit-customer', u.customerID]"><fa-icon [icon]="faEdit"></fa-icon></a>
+                    
+                    <button  class="button-68" role="button" (click)="deleteCustomer()"><fa-icon [icon]="faTrash"></fa-icon></button>
+                   
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+}
+  

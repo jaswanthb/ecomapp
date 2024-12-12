@@ -1,0 +1,203 @@
+Angular CLI
+- Create, build, compile, serve the angular app
+- Create any files, components, pipes, services and class
+
+how to install angular CLI
+
+> npm install -g @angular/cli // for latest else specify version // Install cli globally
+
+//Once cli is installed you should run command ng
+
+Create new angular project
+> ng new <sampleapp> --skip-install
+--Skip-install will not install/get required packages in package.json to local
+Command only creates basic angular files
+
+to install package use command
+navigate to project folder
+> cd sampleapp
+> npm install // this command looks for package.json and install required packages from the files
+> npm install --no-standalone (will not install node_module but creates angular template)
+
+
+package.json
+//dependencies // ng build
+    used to run the application on the server
+
+//devdependencies //ng install
+    used to run the application in local
+
+tsconfig.json
+This is the typescript config file
+few settings like strict mode, target and outdir should be noticied
+
+tsconfig.app.json
+//This extends from tsconfig.json
+//specify which ts file to compile / start with
+
+
+tsconfig.spec.json
+//This extends from tsconfig.json
+//specify which ts file to include for testing
+
+
+Package-lock.json
+this get the dependencies in package.json and its inter-dependencies
+It also maintains all the packages with versions and source path
+We dont need to touch it
+
+
+angular.json
+has the config when ng serve, ng build and ng test commands are run
+
+//src folder
+index.html is the starting file to load it has selector called <app-root>
+starting js file is main.ts which has bootstrap code
+This pick appcomponent and config file and run the application
+
+
+app.component.ts has a class and it has decorator
+decorator has meta data // also called attribute in c#
+
+//Generate component
+> ng g c <component name> //g =generate, c = component
+
+
+01 - Databinding -- look for folder Databinding
+Databinding is a mechanism to bind data values into html DOM and turn user activities into actions
+Types
+    - Interpolation     component => DOM
+    - Property Binding  component => DOM
+    - Event Binding     DOM => component
+    - Two way Binding   component <=> DOM // Should import FormsModule
+
+02 - Directives
+- Extending the power of existing html element
+- It changes the appearance & behaviouur of html element
+- Types of directive
+  Component - Its a directive with a template(html)
+  Structural directive - Adding or removing the DOM element  *ngIf, *ngFor (look for component directive-sample)
+  Attribute - Change the appearance of DOM element   ngClass, ngSyle, ngModel
+  Custom directive
+  >ng g d <directiveName> (ElementRef class is key thing to inject in constructor)
+
+03 - NgModule
+- Container that contains multiple components, directive, pipe, service, other modules
+- NgModule is removed in latest angular version 17
+
+04 - Decorators - Attribute for class
+Class Decorators
+@component
+@directive (look for custom directive appFavs)
+@pipe
+
+Method Decorators
+@Hostlistener() // Hostlistener is for the method which will listen to the event on the native element
+//If you have click event for the button and directive then both will trigger
+
+Field Decorators
+@ViewChild
+
+05 - apply css using bootstrap
+Install any package in angular
+> npm install <packageName> --save
+
+npm install bootstrap --save (save is used to add entry in package.json else it was not shipped out of your machine. packge is installed only in node_modules only)
+package.json should have bootstrap reference
+refer the bootstrap in angular.json in styles section
+
+
+06 - pipes
+-Pipes are used to transform the bound values (look for pipe-sample component)
+-predefined pipes are number, uppercase, lowercase, date, currency, json
+Creating custom pipes
+>ng g p <pipeName>
+
+07 - Routing
+-Loading a webpage based on requested url
+-Navigating from one page to other
+
+Steps to implement routing in angular
+- Import module "RouterModule"
+- Define list of routes
+   const routes: Routes = [
+  {path:'databinding', component: DatabindingComponent},
+  }
+- Map the RouterModule with routes
+	RouterModule.forRoot(routes)
+- Add place holder in app.component.html
+  <router-outlet></router-outlet>
+- Add navlink
+    <a class="nav-link" routerLinkActive="highlight" [routerLink]="['databinding']">DataBinding</a>
+
+Read route parameters and routeparams with query string parameters (look for "GoTo Directive" button on pipe component)
+
+-- Child routing / Nested routes call a component inside component with a different child routes
+
+
+08 - Data sharing (look for customer-add and cutomer-list components)
+-@Input() decorater is used to pass data from parent to child component in terms of Property
+-@Output() decorator is used to pass data from child to parent in terms of events (EventEmitter)
+-Both decorators are created in the child components only
+-@Viewchild() This takes the control of the child component and able to set the Property/data //this is used in parent component
+Creating a ref of child component in parent & taking control on child component (created in Parent)
+This can also be used to access the element
+
+09 - Angular Forms
+-Template driven approach
+-Model driven approach (Reactive forms)
+
+Angular forms has control states
+Pristine state - Form load is pristine also called stable state. One way binding, once goes into dirty never comes back to pristine
+Dirty state - if form is touched then it is changed to dirty state
+untouched state - is for control when control is loaded, control state is untouched. Once way binding, once changes to touched never comes back to untouched
+touched state - when controls is touched then the state is moved to touched from untouched
+valid state - when control has validation not applied. 2 way binding, depends on the input and validation the state changes accordingly
+invalid state - when control has validation then default is invalid state, once validation is passed then control is in valid state
+
+Pristine => dirty (form)
+untouched => touched (control)
+valid <=> invalid (contorl)
+
+
+Steps to implement TemplateDriven approach (add-product component)
+- Design a form and add template ref of type "ngForm"
+   <form #frm="ngForm"></form>
+- Add input elements and provide name & ngModel attribute
+  <input type="text" class="form-control" name="productId" [(ngModel)]="product.productId" />
+- Add ngSubmit event and pass frm object 
+  (ngSubmit)="saveProduct(frm)"
+- To add a validation, use html5 attributes
+  required, pattern, email, max, min, maxlength, minlength, phone
+- To show error message
+	 <div *ngIf="frm.controls['productCode']?.errors">
+		<span class="text-danger">Product Code is mandatory</span>
+	</div>
+	
+Steps to implement Model Driven approach
+- Import a module in app.module.ts "ReactiveFormsModule"
+- Design the model in the ts code, using FormGroup & FormBuilder
+	this.frm = this.fb.group({
+      productId: this.fb.control('')
+	  })
+- Map the fromGroup & formControl in html template
+    <form [formGroup]="frm">
+            <div class="form-group">
+                <label>Product Id</label>
+                <input type="text" class="form-control" formControlName="productId" />
+            </div>
+	</form>
+- Add ngSubmit event & no need to pass formgroup obj
+  (ngSubmit)="saveProduct()"
+- To add valdiation, add in ts code
+  productCode: this.fb.control('',{updateOn:'blur', validators: [Validators.required]})
+- To show error message
+	 <div *ngIf="frm.controls['productCode']?.errors">
+		<span class="text-danger">Product Code is mandatory</span>
+	</div>
+- Easy to write unit tests 
+- Can design complex forms	
+
+10. rxjs (async programming)
+
+10 - Authentication

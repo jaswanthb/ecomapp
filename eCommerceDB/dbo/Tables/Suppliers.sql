@@ -11,6 +11,7 @@
     [Phone]        NVARCHAR (24)  NULL,
     [Fax]          NVARCHAR (24)  NULL,
     [HomePage]     NVARCHAR (100) NULL,
+    [IsActive] BIT NOT NULL DEFAULT 1,
     CONSTRAINT [PK_Suppliers] PRIMARY KEY CLUSTERED ([SupplierID] ASC)
 );
 
