@@ -1,0 +1,38 @@
+<h4>Add Product (Template Driven)</h4>
+
+<div class="row">
+    <div class="col-lg-6">
+        <form #frm="ngForm" (ngSubmit)="SaveProduct(frm)">
+            <div class="form-group">
+                <label>ProductId</label>
+                <input type="text" class="form-control" name="productId" [(ngModel)]="product.productId">
+            </div>
+            <div class="form-group">
+                <label>ProductCode</label>
+                <input type="text" class="form-control" 
+                name="productCode" 
+                [(ngModel)]="product.productCode"
+                required>
+                <div *ngIf="frm.controls['productCode']?.errors">
+                    <span class="text-danger">Product Code is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>ProductName</label>
+                <input type="text" class="form-control" name="productName" 
+                [(ngModel)]="product.productName"
+                required
+                pattern="^[a-zA-Z0-9 ]+$">
+                <div *ngIf="frm.controls['productName']?.errors">
+                    <span class="text-danger" *ngIf="frm.controls['productName']?.hasError('required')">Product Name is required</span>
+                    <span class="text-danger" *ngIf="frm.controls['productName']?.hasError('pattern')">Product Name has invalid characters</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>ProductPrice</label>
+                <input type="text" class="form-control" name="price" [(ngModel)]="product.price">
+            </div>
+            <input type="submit" value="Save Product" class="btn btn-primary" [disabled]="frm.invalid"/>
+        </form>
+    </div>
+</div>

@@ -197,7 +197,3 @@ Steps to implement Model Driven approach
 	</div>
 - Easy to write unit tests 
 - Can design complex forms	
-
-10. rxjs (async programming)
-
-10 - Authentication

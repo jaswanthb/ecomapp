@@ -47,6 +47,6 @@ export class DirectiveSampleComponent {
     this.products.push(new Product(104, "Phone", "P004", 45000));
   }
   showAlert() {
-    alert("test");
+    //alert("test");
   }
 }
